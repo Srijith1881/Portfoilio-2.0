@@ -1,0 +1,505 @@
+import React from 'react';
+import { motion } from "framer-motion";
+import { cn } from "../utils/util";
+import { technologies } from '../constants';
+import Ball from './Ball';
+
+
+
+const Techs = () => {
+  return (
+    <div>
+      <div className='mt-8 flex flex-wrap justify-center items-center gap-6 sm:gap-10 px-4'>
+        {technologies.map((technology) => (
+          <div className='w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center' key={technology.name}>
+            <Ball icon={technology.icon} />
+          </div>
+        ))}
+      </div>
+      
+    </div>
+  );
+};
+
+export default Techs;
+
+
+
+
+
+
+
+
+import React from 'react';
+import { motion } from "framer-motion";
+import { cn } from "../utils/util";
+import { technologies } from '../constants';
+import Ball from './Ball';
+
+export function LampDemo() {
+  return (
+    <>
+    <LampContainer>
+      <motion.h1
+        initial={{ opacity: 0.5, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{delay: 0.3,duration: 0.8, ease: "easeInOut"}}
+        className="mt-8  bg-gradient-to-br from-slate-300 to-white py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+      >
+        Technologies
+      </motion.h1>
+        
+      {/* Technologies Section */}
+      <div className='mt-8 flex flex-wrap justify-center items-center gap-6 sm:gap-10 px-4'>
+        {technologies.map((technology) => (
+          <div className='w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center' key={technology.name}>
+            <Ball icon={technology.icon} />
+          </div>
+        ))}
+      </div>
+    </LampContainer>
+    </>
+  );
+}
+
+export const LampContainer = ({ children, className }) => {
+  return (
+    <div
+      className={cn(
+        "relative flex h-screen flex-col items-center justify-center overflow-hidden bg-black w-full rounded-md z-0",
+        className
+      )}
+    >
+      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
+        <motion.div
+          initial={{ opacity: 0.5, width: "15rem" }}
+          whileInView={{ opacity: 1, width: "30rem" }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          style={{
+            backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
+          }}
+          className="absolute inset-auto right-1/2 h-56 overflow-visible w-[30rem] bg-gradient-conic from-red-600 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
+        >
+          <div className="absolute w-[100%] left-0 bg-black h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+          <div className="absolute w-40 h-[100%] left-0 bg-black bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0.5, width: "15rem" }}
+          whileInView={{ opacity: 1, width: "30rem" }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          style={{
+            backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
+          }}
+          className="absolute inset-auto left-1/2 h-56 w-[30rem] bg-gradient-conic from-transparent via-transparent to-red-600 text-white [--conic-position:from_290deg_at_center_top]"
+        >
+          <div className="absolute w-40 h-[100%] right-0 bg-black bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
+          <div className="absolute w-[100%] right-0 bg-black h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+        </motion.div>
+        <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-black blur-2xl"></div>
+        <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
+        <div className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-red-600 opacity-50 blur-3xl"></div>
+        <motion.div
+          initial={{ width: "8rem" }}
+          whileInView={{ width: "16rem" }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-red-600 blur-2xl"
+        ></motion.div>
+        <motion.div
+          initial={{ width: "15rem" }}
+          whileInView={{ width: "30rem" }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-red-600"
+        ></motion.div>
+        <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-black"></div>
+      </div>
+      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+const Techs = () => {
+  return (
+    <div>
+      <LampDemo />
+      
+    </div>
+  );
+};
+
+export default Techs;
+
+
+
+
+
+
+planet contact:
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Mail, FileText, Sparkles, X, Send } from 'lucide-react';
+
+const Contact = () => {
+  const [showForm, setShowForm] = useState(false);
+  const [showFunFact, setShowFunFact] = useState(false);
+  const [currentFact, setCurrentFact] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const funFacts = [
+    "There are more possible games of chess than atoms in the observable universe! ♟️",
+    "Octopuses have three hearts and blue blood! 🐙",
+    "A group of flamingos is called a 'flamboyance'! 🦩",
+    "Honey never spoils - archaeologists found edible honey in ancient Egyptian tombs! 🍯",
+    "The heart of a shrimp is located in its head! 🦐",
+    "Bananas are berries, but strawberries aren't! 🍌",
+    "A single strand of spaghetti is called a 'spaghetto'! 🍝",
+    "Dolphins have names for each other! 🐬"
+  ];
+
+  const generateFunFact = () => {
+    const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+    setCurrentFact(randomFact);
+    setShowFunFact(true);
+  };
+
+  const handleFormSubmit = () => {
+    // Simulate form submission
+    alert('Message sent to the cosmos! 🚀');
+    setShowForm(false);
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  const planets = [
+    {
+      id: 'github',
+      name: 'GitHub Galaxy',
+      icon: Github,
+      color: 'bg-red-500',
+      action: () => window.open('https://github.com', '_blank'),
+      position: { top: '20%', left: '15%' },
+      size: 'w-16 h-16'
+    },
+    {
+      id: 'resume',
+      name: 'Resume Nebula',
+      icon: FileText,
+      color: 'bg-white',
+      action: () => window.open('#', '_blank'),
+      position: { top: '60%', right: '20%' },
+      size: 'w-20 h-20'
+    },
+    {
+      id: 'email',
+      name: 'Email Cosmos',
+      icon: Mail,
+      color: 'bg-red-600',
+      action: () => setShowForm(true),
+      position: { top: '75%', left: '25%' },
+      size: 'w-14 h-14'
+    },
+    {
+      id: 'funfact',
+      name: 'Fun Fact Planet',
+      icon: Sparkles,
+      color: 'bg-gray-300',
+      action: generateFunFact,
+      position: { top: '30%', right: '15%' },
+      size: 'w-18 h-18'
+    }
+  ];
+
+  // Floating stars animation
+  const stars = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 1,
+    delay: Math.random() * 2
+  }));
+
+  return (
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Animated Stars Background */}
+      {stars.map((star) => (
+        <motion.div
+          key={star.id}
+          className="absolute bg-white rounded-full opacity-60"
+          style={{
+            left: `${star.x}%`,
+            top: `${star.y}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+          }}
+          animate={{
+            opacity: [0.3, 1, 0.3],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            delay: star.delay,
+          }}
+        />
+      ))}
+
+      {/* Main Content */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 bg-gradient-to-r from-white via-red-200 to-white bg-clip-text text-transparent">
+            Contact
+          </h1>
+          <p className="text-xl text-gray-300 flex items-center justify-center gap-2">
+            Reach out through the universe <span className="text-2xl">✨</span>
+          </p>
+        </motion.div>
+
+        {/* Planets Container */}
+        <div className="relative w-full max-w-4xl h-96">
+          {planets.map((planet, index) => (
+            <motion.div
+              key={planet.id}
+              className={`absolute ${planet.size} ${planet.color} rounded-full cursor-pointer shadow-2xl flex items-center justify-center group hover:shadow-red-500/50 transition-all duration-300`}
+              style={planet.position}
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                scale: 1.1,
+                boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              onClick={planet.action}
+            >
+              <planet.icon 
+                className={`w-6 h-6 ${planet.color === 'bg-white' ? 'text-black' : 'text-white'} group-hover:scale-110 transition-transform`} 
+              />
+              
+              {/* Planet Label */}
+              <motion.div
+                className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+                initial={{ y: 10 }}
+                whileHover={{ y: 0 }}
+              >
+                {planet.name}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-800"></div>
+              </motion.div>
+
+              {/* Orbital Ring */}
+              <motion.div
+                className="absolute inset-0 border border-gray-600 rounded-full opacity-30"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                style={{ transform: 'scale(1.5)' }}
+              />
+            </motion.div>
+          ))}
+
+          {/* Central Sun/Glow */}
+          <motion.div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-red-500 to-red-700 rounded-full opacity-20"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.3, 0.2],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Contact Form Modal */}
+      <AnimatePresence>
+        {showForm && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-gray-900 border border-gray-700 rounded-2xl p-8 max-w-md w-full relative shadow-2xl"
+              initial={{ scale: 0.5, rotateY: -90 }}
+              animate={{ scale: 1, rotateY: 0 }}
+              exit={{ scale: 0.5, rotateY: 90 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowForm(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              {/* Form Header */}
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-white mb-2">Spaceship Terminal</h3>
+                <p className="text-gray-400">Send a message across the cosmos</p>
+              </div>
+
+              {/* Form */}
+              <div className="space-y-4">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-red-500 focus:outline-none transition-colors"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-red-500 focus:outline-none transition-colors"
+                    required
+                  />
+                </div>
+                <div>
+                  <textarea
+                    placeholder="Your message to the universe..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    rows={4}
+                    className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-red-500 focus:outline-none transition-colors resize-none"
+                    required
+                  />
+                </div>
+                <motion.button
+                  onClick={handleFormSubmit}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Send className="w-5 h-5" />
+                  Launch Message
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Fun Fact Modal */}
+      <AnimatePresence>
+        {showFunFact && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-gray-900 border border-gray-700 rounded-2xl p-8 max-w-md w-full relative shadow-2xl"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              exit={{ scale: 0, rotate: 180 }}
+              transition={{ type: "spring", stiffness: 150, damping: 15 }}
+            >
+              <button
+                onClick={() => setShowFunFact(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className="text-center">
+                <motion.div
+                  className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-700 rounded-full flex items-center justify-center mx-auto mb-4"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                >
+                  <Sparkles className="w-8 h-8 text-white" />
+                </motion.div>
+                <h3 className="text-2xl font-bold text-white mb-4">Cosmic Fun Fact!</h3>
+                <p className="text-gray-300 text-lg leading-relaxed">{currentFact}</p>
+                <motion.button
+                  onClick={generateFunFact}
+                  className="mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Another One!
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Particles */}
+      {Array.from({ length: 20 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-red-400 rounded-full opacity-40"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -100, 0],
+            x: [0, Math.random() * 50 - 25, 0],
+            opacity: [0.4, 0.8, 0.4],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+
+      {/* Instructions */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1 }}
+      >
+        <p className="text-gray-500 text-sm">Click the planets to navigate through space</p>
+      </motion.div>
+    </div>
+  );
+};
+
+export default Contact;

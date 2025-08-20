@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bg1{
+    background: rgb(0,0,0);
+background: linear-gradient(32deg, rgba(0,0,0,0.5271358543417367) 0%, rgba(0,0,0,0.499124649859944) 100%);}
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    overflow-y: scroll; /* Ensure vertical scrolling */
+  }
+  
+  /* Fix for nav and container elements */
+  nav {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .sketchfab-embed-wrapper iframe {
+    max-width: 100%;
+  }
+  
+  .bg-black {
+    width: 100%;
+  }
+  
+.card-bg{
+  background: rgb(255,255,255);
+background: linear-gradient(171deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 52%, rgba(255,0,0,1) 100%);
+}
+
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-preserve {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-content {
+  backface-visibility: hidden;
+  position: absolute;
+  inset: 0;
+}
