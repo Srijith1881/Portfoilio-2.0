@@ -4,11 +4,62 @@ import { motion } from 'framer-motion';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 
-
-const Card = ({ data,index }) => {
+const Card = ({ data, index }) => {
   const { title, description, image, liveLink, codeLink } = data;
   const navigate = useNavigate();
 
+  // Helper function to get responsive profile pic size
+  const getProfilePicSize = () => {
+    if (window.innerWidth < 480) {
+      return { width: '60px', height: '60px' }; // Mobile
+    } else if (window.innerWidth < 768) {
+      return { width: '70px', height: '70px' }; // Tablet
+    } else {
+      return { width: '90px', height: '90px' }; // Desktop
+    }
+  };
+
+  // Helper function to get responsive positioning
+  const getProfilePicPosition = () => {
+    if (window.innerWidth < 480) {
+      return { top: '6px', left: '6px' }; // Mobile
+    } else if (window.innerWidth < 768) {
+      return { top: '7px', left: '7px' }; // Tablet
+    } else {
+      return { top: '8px', left: '8px' }; // Desktop
+    }
+  };
+
+  // Helper function to get responsive image scale and position
+  const getImageTransform = () => {
+    if (window.innerWidth < 480) {
+      return { 
+        scale: 'scale(1.8)', 
+        objectPosition: '0px 15px' 
+      }; // Mobile
+    } else if (window.innerWidth < 768) {
+      return { 
+        scale: 'scale(2.1)', 
+        objectPosition: '0px 20px' 
+      }; // Tablet
+    } else {
+      return { 
+        scale: 'scale(2.5)', 
+        objectPosition: '0px 25px' 
+      }; // Desktop
+    }
+  };
+
+  // Helper function to get responsive border radius
+  const getBorderRadius = () => {
+    if (window.innerWidth < 480) {
+      return '50px 15px 15px 15px'; // Mobile
+    } else if (window.innerWidth < 768) {
+      return '55px 16px 16px 16px'; // Tablet
+    } else {
+      return '65px 18px 18px 18px'; // Desktop
+    }
+  };
 
   const cardStyle = {
     width: '100%',
@@ -19,7 +70,7 @@ const Card = ({ data,index }) => {
     position: 'relative',
     boxShadow: '0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)',
     transition: 'all 0.5s ease-in-out',
-    maxWidth: '320px',
+    maxWidth: window.innerWidth < 480 ? '280px' : '320px', // Larger on mobile
     margin: '0 auto',
     border: '1px solid rgba(139, 69, 19, 0.2)'
   };
@@ -86,27 +137,27 @@ const Card = ({ data,index }) => {
 
   const nameStyle = {
     display: 'block',
-    fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+    fontSize: window.innerWidth < 480 ? '0.9rem' : 'clamp(1rem, 2.5vw, 1.2rem)', // Smaller on mobile
     color: '#ffffff',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: '1rem',
+    marginBottom: window.innerWidth < 480 ? '0.5rem' : '1rem', // Reduced margin on mobile
     textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
   };
 
   const aboutMeStyle = {
     display: 'block',
-    fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
+    fontSize: window.innerWidth < 480 ? '0.75rem' : 'clamp(0.8rem, 2vw, 0.9rem)', // Smaller on mobile
     color: '#e5e5e5',
     textAlign: 'left',
-    lineHeight: '1.5',
+    lineHeight: '1.4', // Slightly reduced line height
     opacity: 0.9
   };
 
   const bottomBottomStyle = {
     display: 'flex',
     justifyContent: 'center',
-    gap: '1rem',
+    gap: window.innerWidth < 480 ? '0.5rem' : '1rem', // Smaller gap on mobile
     marginTop: '0'
   };
 
@@ -115,14 +166,14 @@ const Card = ({ data,index }) => {
     color: '#ffffff',
     border: 'none',
     borderRadius: '12px',
-    fontSize: 'clamp(0.7rem, 1.8vw, 0.9rem)',
-    padding: '0.6rem 1.2rem',
+    fontSize: window.innerWidth < 480 ? '0.65rem' : 'clamp(0.7rem, 1.8vw, 0.9rem)', // Smaller on mobile
+    padding: window.innerWidth < 480 ? '0.4rem 0.8rem' : '0.6rem 1.2rem', // Smaller padding on mobile
     margin: 0,
     boxShadow: '0 4px 12px rgba(220, 38, 38, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
     fontWeight: 600,
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    minWidth: '70px',
+    minWidth: window.innerWidth < 480 ? '50px' : '70px', // Smaller minimum width on mobile
     textTransform: 'uppercase',
     letterSpacing: '0.5px'
   };
@@ -145,18 +196,22 @@ const Card = ({ data,index }) => {
           if (bottom) {
             bottom.style.top = '20%';
             bottom.style.zIndex = '2';
-            bottom.style.borderRadius = '65px 18px 18px 18px';
+            bottom.style.borderRadius = getBorderRadius();
             bottom.style.justifyContent = 'flex-start';
-            bottom.style.padding = '2rem 1rem 1rem 1rem';
+            // Responsive padding for mobile
+            const padding = window.innerWidth < 480 ? '1.5rem 0.8rem 0.8rem 0.8rem' : '2rem 1rem 1rem 1rem';
+            bottom.style.padding = padding;
             bottom.style.background = 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)';
           }
           
           const profilePic = e.currentTarget.querySelector('.profile-pic');
           if (profilePic) {
-            profilePic.style.width = '90px';
-            profilePic.style.height = '90px';
-            profilePic.style.top = '8px';
-            profilePic.style.left = '8px';
+            const size = getProfilePicSize();
+            const position = getProfilePicPosition();
+            profilePic.style.width = size.width;
+            profilePic.style.height = size.height;
+            profilePic.style.top = position.top;
+            profilePic.style.left = position.left;
             profilePic.style.borderRadius = '50%';
             profilePic.style.zIndex = '3';
             profilePic.style.border = '3px solid #dc2626';
@@ -166,8 +221,9 @@ const Card = ({ data,index }) => {
           
           const img = e.currentTarget.querySelector('.profile-pic img');
           if (img) {
-            img.style.transform = 'scale(2.5)';
-            img.style.objectPosition = '0px 25px';
+            const transform = getImageTransform();
+            img.style.transform = transform.scale;
+            img.style.objectPosition = transform.objectPosition;
             img.style.transition = 'all 0.5s ease-in-out 0.5s';
           }
           
@@ -176,9 +232,13 @@ const Card = ({ data,index }) => {
             content.style.display = 'block';
             content.style.flex = '1';
             content.style.overflow = 'auto';
-            content.style.maxHeight = '120px';
-            content.style.marginBottom = '1rem';
-            content.style.marginTop = '1rem';
+            // Responsive max height for mobile
+            const maxHeight = window.innerWidth < 480 ? '100px' : '120px';
+            content.style.maxHeight = maxHeight;
+            const marginBottom = window.innerWidth < 480 ? '0.5rem' : '1rem';
+            const marginTop = window.innerWidth < 480 ? '0.5rem' : '1rem';
+            content.style.marginBottom = marginBottom;
+            content.style.marginTop = marginTop;
             content.style.scrollbarWidth = 'thin';
             content.style.scrollbarColor = 'rgba(220, 38, 38, 0.5) transparent';
           }
@@ -287,7 +347,7 @@ const Card = ({ data,index }) => {
     onClick={(e) => {
       e.preventDefault();
       if (liveLink === "#") {
-        toast.error("The project is not live now."); // Replace with your toast
+        toast.error("The project is not live now.");
       } else {
         window.open(liveLink, '_blank');
       }
@@ -313,9 +373,7 @@ const Card = ({ data,index }) => {
     onClick={(e) => {
       e.preventDefault();
       if (codeLink === "#") {
-        // Show toast notification - replace this with your toast library
-        // Example: toast.error("Source code is not available yet");
-        alert("Source code is not available yet"); // Replace with your toast
+        alert("Source code is not available yet");
       } else {
         window.open(codeLink, '_blank');
       }
