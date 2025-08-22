@@ -11,7 +11,7 @@ const Card = ({ data, index }) => {
   // Helper function to get responsive profile pic size
   const getProfilePicSize = () => {
     if (window.innerWidth < 480) {
-      return { width: '60px', height: '60px' }; // Mobile
+      return { width: '40px', height: '40px' }; // Mobile
     } else if (window.innerWidth < 768) {
       return { width: '70px', height: '70px' }; // Tablet
     } else {
@@ -77,13 +77,13 @@ const Card = ({ data, index }) => {
 
   const mailStyle = {
     position: 'absolute',
-    right: '1.5rem',
-    top: '1.2rem',
+    right: window.innerWidth < 480 ? '0.8rem' : '1.5rem', // Closer to corner on mobile
+    top: window.innerWidth < 480 ? '0.8rem' : '1.2rem', // Higher up on mobile
     background: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(10px)',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     borderRadius: '50%',
-    padding: '8px',
+    padding: window.innerWidth < 480 ? '6px' : '8px', // Smaller padding on mobile
     cursor: 'pointer',
     zIndex: 4,
     transition: 'all 0.3s ease'
@@ -166,14 +166,14 @@ const Card = ({ data, index }) => {
     color: '#ffffff',
     border: 'none',
     borderRadius: '12px',
-    fontSize: window.innerWidth < 480 ? '0.65rem' : 'clamp(0.7rem, 1.8vw, 0.9rem)', // Smaller on mobile
-    padding: window.innerWidth < 480 ? '0.4rem 0.8rem' : '0.6rem 1.2rem', // Smaller padding on mobile
+    fontSize: window.innerWidth < 480 ? '0.6rem' : 'clamp(0.7rem, 1.8vw, 0.9rem)', // Even smaller on mobile
+    padding: window.innerWidth < 480 ? '0.35rem 0.7rem' : '0.6rem 1.2rem', // Smaller padding on mobile
     margin: 0,
     boxShadow: '0 4px 12px rgba(220, 38, 38, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
     fontWeight: 600,
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    minWidth: window.innerWidth < 480 ? '50px' : '70px', // Smaller minimum width on mobile
+    minWidth: window.innerWidth < 480 ? '45px' : '70px', // Even smaller minimum width on mobile
     textTransform: 'uppercase',
     letterSpacing: '0.5px'
   };
@@ -194,12 +194,13 @@ const Card = ({ data, index }) => {
           
           const bottom = e.currentTarget.querySelector('.bottom');
           if (bottom) {
-            bottom.style.top = '20%';
+            // Mobile gets more visible content area by starting higher
+            bottom.style.top = window.innerWidth < 480 ? '15%' : '20%';
             bottom.style.zIndex = '2';
             bottom.style.borderRadius = getBorderRadius();
             bottom.style.justifyContent = 'flex-start';
-            // Responsive padding for mobile
-            const padding = window.innerWidth < 480 ? '1.5rem 0.8rem 0.8rem 0.8rem' : '2rem 1rem 1rem 1rem';
+            // Responsive padding for mobile - reduced top padding to give more content space
+            const padding = window.innerWidth < 480 ? '1rem 0.8rem 0.8rem 0.8rem' : '2rem 1rem 1rem 1rem';
             bottom.style.padding = padding;
             bottom.style.background = 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)';
           }
@@ -232,11 +233,11 @@ const Card = ({ data, index }) => {
             content.style.display = 'block';
             content.style.flex = '1';
             content.style.overflow = 'auto';
-            // Responsive max height for mobile
-            const maxHeight = window.innerWidth < 480 ? '100px' : '120px';
+            // Increased max height for mobile to show more content
+            const maxHeight = window.innerWidth < 480 ? '110px' : '120px';
             content.style.maxHeight = maxHeight;
             const marginBottom = window.innerWidth < 480 ? '0.5rem' : '1rem';
-            const marginTop = window.innerWidth < 480 ? '0.5rem' : '1rem';
+            const marginTop = window.innerWidth < 480 ? '0.3rem' : '1rem'; // Reduced top margin on mobile
             content.style.marginBottom = marginBottom;
             content.style.marginTop = marginTop;
             content.style.scrollbarWidth = 'thin';
@@ -322,8 +323,8 @@ const Card = ({ data, index }) => {
             strokeWidth={2} 
             fill="none" 
             viewBox="0 0 24 24" 
-            height={18} 
-            width={18} 
+            height={window.innerWidth < 480 ? 14 : 18} // Smaller icon on mobile
+            width={window.innerWidth < 480 ? 14 : 18} 
             xmlns="http://www.w3.org/2000/svg"
           >
             <rect rx={2} y={4} x={2} height={16} width={20} />
