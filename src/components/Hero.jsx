@@ -31,11 +31,11 @@ const Hero = () => {
   };
 
   const handleLinkedInClick = () => {
-    window.open("https://linkedin.com/in/your-profile", "_blank", "noopener,noreferrer");
+    window.open("https://www.linkedin.com/in/srijith-vy1881/", "_blank", "noopener,noreferrer");
   };
 
   const handleGitHubClick = () => {
-    window.open("https://github.com/your-username", "_blank", "noopener,noreferrer");
+    window.open("https://github.com/Srijith1881", "_blank", "noopener,noreferrer");
   };
 
   useEffect(() => {
