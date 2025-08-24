@@ -45,25 +45,30 @@ const Hero = () => {
     if (vantaEffect.current) return; // prevent double init
 
     const init = () => {
-      try {
-        vantaEffect.current = NET({
-          el: vantaRef.current,
-          THREE,
-          mouseControls: true,
-          touchControls: false, // safer on mobile
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0xffffff,
-          backgroundColor: 0x000000,
-          backgroundAlpha: 1.0, // avoid transparency glitches on mobile
-          points: 13.0,
-          maxDistance: 23.0,
-          spacing: 18.0,
-          showDots: false,
-        });
+  try {
+    const isMobile = window.innerWidth < 768; // treat small screens as mobile
+
+    vantaEffect.current = NET({
+      el: vantaRef.current,
+      THREE,
+      mouseControls: true,
+      touchControls: false,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0xffffff,
+      backgroundColor: 0x000000,
+      backgroundAlpha: 1.0,
+
+      // 👇 Key part: separate configs for mobile vs desktop
+      points: isMobile ? 6.0 : 13.0,       // fewer points on mobile
+      maxDistance: isMobile ? 18.0 : 23.0, // shorter connections
+      spacing: isMobile ? 22.0 : 18.0,     // more spacing between points
+      showDots: false,
+    });
+
 
         // Handle WebGL context loss on some mobile browsers
         const canvas = vantaRef.current?.querySelector("canvas");
